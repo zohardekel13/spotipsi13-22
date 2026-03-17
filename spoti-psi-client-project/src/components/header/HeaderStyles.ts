@@ -2,9 +2,20 @@ import { makeStyles } from "tss-react/mui";
 
 const useStyles = makeStyles()(() => ({
     headerDiv: {
-        width : '100%',
+       display:"flex",
+        flexDirection:"row",
+        justifyContent:"center",
+        alignItems:"center",
+        width : '35%',
         height : '8%',
+        paddingLeft: '65%',
         backgroundColor: '#383838'
+    },
+    heading:{
+        paddingRight:"20%",
+        color:"#33006F",
+        fontWeight:"bold",
+        fontSize:"200%"
     }
 
 }));
