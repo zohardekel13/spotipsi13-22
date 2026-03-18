@@ -1,5 +1,5 @@
 
-import { Add, FavoriteBorder, PlayArrow } from "@mui/icons-material";
+import { Add, FavoriteBorder, PlayArrow } from "@mui/icons-material"
 import useStyles from "./AllSongsStyle";
 
 interface Song {
