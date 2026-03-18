@@ -12,7 +12,10 @@ const useStyles = makeStyles()(() => ({
         "&:hover":{
             backgroundColor: '#202020'
         },
-        cursor: 'pointer'
+        cursor: 'pointer',
+        webkitScrollbar : {
+            color: 'red'
+        }
     },
     arrow: {
         color: "purple",
