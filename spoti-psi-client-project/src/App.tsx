@@ -3,8 +3,6 @@ import Header from "./components/header/Header";
 import MainSection from "./components/main_section/MainSection";
 import Player from "./components/player/Player";
 
-
-
 export interface Song{
     id:string,
     name:string,
@@ -20,15 +18,22 @@ export interface Song{
  * @returns the App components
  */
 const App = () => {
+  //global array of songs, followed by state
+  const [songsGlobal,setSongsGlobal] = useState<Song[]>([]);
+
+  //the currentPage followed by state
+  const [currentPage,setCurrentPage] = useState<string>("");
   return(
     <div className="mainDiv">
        <Header></Header>
-       <MainSection></MainSection>
+       <MainSection setPageContect={setCurrentPage}></MainSection>
        <Player></Player>
 
     </div>
-
+   
   )
 
 }
 export default App;
+
+
