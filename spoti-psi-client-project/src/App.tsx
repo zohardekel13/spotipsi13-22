@@ -24,8 +24,8 @@ export interface SongsPageProps {
     setSongsGlobal :  React.Dispatch<React.SetStateAction<Song[]>>,
     currentPage : string,
     setCurrentPage :  React.Dispatch<React.SetStateAction<string>>,
-    favoirtesIds: number[],
-    setFavoritesIds: React.Dispatch<React.SetStateAction<number[]>>
+    favoirtesIds: string[],
+    setFavoritesIds: React.Dispatch<React.SetStateAction<string[]>>
 
 }
     
@@ -36,7 +36,7 @@ const App = () => {
   //the currentPage followed by state
   const [currentPage,setCurrentPage] = useState<string>("");
 
-  const [favoirtesIds,setFavoritesIds] = useState<number[]>([]);
+  const [favoirtesIds,setFavoritesIds] = useState<string[]>([]);
   
   const currentSongsProps : SongsPageProps = {songsGlobal, setSongsGlobal, currentPage, setCurrentPage,favoirtesIds,setFavoritesIds}
   return(

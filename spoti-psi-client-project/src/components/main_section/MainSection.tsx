@@ -7,8 +7,8 @@ export interface PageContectProps {
     songsGlobal : Song[],
     setSongsGlobal :  React.Dispatch<React.SetStateAction<Song[]>>,
     currentPage : string,
-    favoirtesIds: number[],
-    setFavoritesIds:  React.Dispatch<React.SetStateAction<number[]>>
+    favoirtesIds: string[],
+    setFavoritesIds:  React.Dispatch<React.SetStateAction<string[]>>
     
 
 }
