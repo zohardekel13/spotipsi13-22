@@ -1,10 +1,8 @@
 import useStyles from "./PageContectStyle";
-import useUrl from "../../customs/use_url/useUrl";
+import useUrl from "../use_url/useUrl";
 import AllSongsPage from "../all_songs_page/AllSongsPage";
-
-interface Url {
-    url: string
-}
+import type { SongsPageProps } from "../../App";
+import type { PageContectProps } from "../main_section/MainSection";
 interface Song {
     id: string,
     name: string,
@@ -18,10 +16,9 @@ interface PageInformation {
     error: string
 }
 
-interface PageContectProps {
-    songs: Song[],
-    setSongs: ((songs: Song[]) => void),
-    currentPage: string
+export interface useUrlProps {
+    currentPage : string,
+    setSongsGlobal: React.Dispatch<React.SetStateAction<Song[]>>
 }
 
 /**
@@ -29,19 +26,20 @@ interface PageContectProps {
  * and creates a div of all the page contect by the url.
  * @returns - A div of all the page contect by the url.
  */
-const PageContect = ({songs,setSongs,currentPage}:PageContectProps) => {
+const PageContect = ({songsGlobal,setSongsGlobal, currentPage} : PageContectProps) => {
     const { classes } = useStyles();
-
-    const current_url: Url = { url: currentPage };
-    const { songsList, isLoading, error } = useUrl(current_url);
+    
+    const currentUseUrl: useUrlProps = {currentPage, setSongsGlobal};
+    const {isLoading, error } = useUrl(currentUseUrl);
+    
 
     const page_information: PageInformation = {
-        songsList: songsList,
+        songsList: songsGlobal,
         isLoading: isLoading,
         error: error
     }
         {if (currentPage == "songs")
-        {
+        {   
             return(
             <div className={classes.pageContectContainer}>
                 <AllSongsPage songsList={page_information.songsList} isLoading={page_information.isLoading} error={page_information.error}></AllSongsPage>

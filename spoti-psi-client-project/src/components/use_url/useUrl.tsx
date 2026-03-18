@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-
-
+import type { useUrlProps } from '../pageContect/PageContect';
 
 interface Song{
     id:string,
@@ -9,17 +8,15 @@ interface Song{
     artist:string,
     album:string
 }
-interface Url{
-    url : string
-}
+
 /**
  * The function is a custom hook,
  * it gets a url type and fetch all the songs by the url, from the server.
  * @param param - A url object with the url name.
  * @returns - The song list, is loading and error parameters.
  */
-const useUrl = ({url} : Url) => {
-    const [songsList, setSongsList] = React.useState<Song[]>([]);
+const useUrl = ({currentPage, setSongsGlobal} : useUrlProps) => {
+
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string>('');
     
@@ -29,11 +26,15 @@ const useUrl = ({url} : Url) => {
         setIsLoading(true);
         try {
             // גישה לשרת
-            const response = await fetch(`http://127.0.0.1:5001/api/${url}`);
-            const data = await response.json();
+            let data = [];
+            if (currentPage != ""){
+                const response = await fetch(`http://127.0.0.1:5001/api/${currentPage}`);
+                data = await response.json();
+            }
 
-            // הוספת שירים לסטייט לאחר שהתקבלו מהשרת
-            setSongsList(data);
+            setSongsGlobal(data);
+
+
         } catch (error) {
             // הגדרת שגיאה בגישה לשרת
             setError("Something went wrong");
@@ -50,10 +51,10 @@ const useUrl = ({url} : Url) => {
     // רק ברנדור הראשון של הקומפוננטה
     useEffect(() => {
         fetchSongs();
-    }, []);
+    }, [currentPage]);
 
 
-    return {songsList, isLoading, error};
+    return {isLoading, error};
 }
 
 export default useUrl;

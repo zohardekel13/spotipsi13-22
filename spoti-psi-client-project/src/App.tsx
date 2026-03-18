@@ -17,16 +17,27 @@ export interface Song{
  * player component: represent the down part of the page
  * @returns the App components
  */
+
+
+export interface SongsPageProps {
+    songsGlobal : Song[],
+    setSongsGlobal :  React.Dispatch<React.SetStateAction<Song[]>>,
+    currentPage : string,
+    setCurrentPage :  React.Dispatch<React.SetStateAction<string>>
+}
+    
 const App = () => {
   //global array of songs, followed by state
   const [songsGlobal,setSongsGlobal] = useState<Song[]>([]);
 
   //the currentPage followed by state
   const [currentPage,setCurrentPage] = useState<string>("");
+  
+  const currentSongsProps : SongsPageProps = {songsGlobal, setSongsGlobal, currentPage, setCurrentPage}
   return(
     <div className="mainDiv">
        <Header></Header>
-       <MainSection setPageContect={setCurrentPage}></MainSection>
+       <MainSection songsGlobal={currentSongsProps.songsGlobal} setSongsGlobal={currentSongsProps.setSongsGlobal} currentPage={currentSongsProps.currentPage} setCurrentPage={currentSongsProps.setCurrentPage} ></MainSection>
        <Player></Player>
 
     </div>
