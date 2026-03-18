@@ -18,15 +18,21 @@ interface PageInformation {
     error: string
 }
 
+interface PageContectProps {
+    songs: Song[],
+    setSongs: ((songs: Song[]) => void),
+    currentPage: string
+}
+
 /**
  * The function is a conponent, it gets all the page information by the url,
  * and creates a div of all the page contect by the url.
  * @returns - A div of all the page contect by the url.
  */
-const PageContect = () => {
+const PageContect = ({songs,setSongs,currentPage}:PageContectProps) => {
     const { classes } = useStyles();
 
-    const current_url: Url = { url: "songs" };
+    const current_url: Url = { url: currentPage };
     const { songsList, isLoading, error } = useUrl(current_url);
 
     const page_information: PageInformation = {
@@ -34,11 +40,21 @@ const PageContect = () => {
         isLoading: isLoading,
         error: error
     }
-    return (
-        <div className={classes.pageContectContainer}>
-            <AllSongsPage songsList={page_information.songsList} isLoading={page_information.isLoading} error={page_information.error}></AllSongsPage>
-        </div>
-    );
+        {if (currentPage == "songs")
+        {
+            return(
+            <div className={classes.pageContectContainer}>
+                <AllSongsPage songsList={page_information.songsList} isLoading={page_information.isLoading} error={page_information.error}></AllSongsPage>
+            </div>
+            );
+        }
+        else
+            return(
+                <div>
+
+                </div>
+            );
+        }
 }
 
 export default PageContect;
