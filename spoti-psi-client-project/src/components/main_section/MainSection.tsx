@@ -8,9 +8,8 @@ export interface PageContectProps {
     setSongsGlobal :  React.Dispatch<React.SetStateAction<Song[]>>,
     currentPage : string,
     favoirtesIds: string[],
-    setFavoritesIds:  React.Dispatch<React.SetStateAction<string[]>>
+    setFavoritesIds: React.Dispatch<React.SetStateAction<string[]>>
     
-
 }
 
 
@@ -23,7 +22,7 @@ const MainSection = ({songsGlobal, setSongsGlobal, currentPage, setCurrentPage,f
         
         <div className={classes.mainSectionDiv}>
             <PageContect songsGlobal={currentPageContectProps.songsGlobal} setSongsGlobal={currentPageContectProps.setSongsGlobal}
-             currentPage={currentPageContectProps.currentPage} favoirtesIds={currentPageContectProps.favoirtesIds}
+             currentPage={currentPageContectProps.currentPage} favoirtesIds={currentPageContectProps.favoirtesIds} 
              setFavoritesIds={currentPageContectProps.setFavoritesIds}></PageContect>
             <Sidebar setCurrentPage={setCurrentPage}></Sidebar>
         </div>

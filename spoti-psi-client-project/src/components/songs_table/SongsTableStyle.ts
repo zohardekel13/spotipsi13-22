@@ -34,7 +34,7 @@ const useStyles = makeStyles()(() => ({
         height: "100%"
     },
     leftIcons: {
-        color: "white",
+        // color: "white",
         size : 'small'
     }
 
