@@ -1,7 +1,6 @@
 import useStyles from "./PageContectStyle";
 import useUrl from "../use_url/useUrl";
 import AllSongsPage from "../all_songs_page/AllSongsPage";
-import type { SongsPageProps } from "../../App";
 import type { PageContectProps } from "../main_section/MainSection";
 interface Song {
     id: string,
@@ -16,9 +15,9 @@ interface PageInformation {
     error: string
 }
 
-export interface useUrlProps {
+export interface useUrlProps<T>{
     currentPage : string,
-    setSongsGlobal: React.Dispatch<React.SetStateAction<Song[]>>
+    setSongsGlobal: React.Dispatch<React.SetStateAction<T[]>> 
 }
 
 /**
@@ -26,25 +25,36 @@ export interface useUrlProps {
  * and creates a div of all the page contect by the url.
  * @returns - A div of all the page contect by the url.
  */
-const PageContect = ({songsGlobal,setSongsGlobal, currentPage} : PageContectProps) => {
+const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFavoritesIds} : PageContectProps) => {
     const { classes } = useStyles();
     
-    const currentUseUrl: useUrlProps = {currentPage, setSongsGlobal};
-    const {isLoading, error } = useUrl(currentUseUrl);
+    const songsUseUrl: useUrlProps<Song> = {currentPage, setSongsGlobal};
+    const {isLoading: isLoadingSongs, error: errorSongs } = useUrl(songsUseUrl);
+    //  const favoriteUseUrl: useUrlProps<number> = {currentPage, setSongsGlobal: setFavoritesIds};
+    //  const {isLoading: isLoadingFavorites, error:ErrorFavorites} = useUrl(favoriteUseUrl);
+    
     
 
     const page_information: PageInformation = {
         songsList: songsGlobal,
-        isLoading: isLoading,
-        error: error
+        isLoading: isLoadingSongs,
+        error: errorSongs
     }
-        {if (currentPage == "songs")
+        if (currentPage == "songs")
         {   
             return(
             <div className={classes.pageContectContainer}>
                 <AllSongsPage songsList={page_information.songsList} isLoading={page_information.isLoading} error={page_information.error}></AllSongsPage>
             </div>
             );
+        }
+        else if (currentPage == "favorites")
+        {
+            return(
+                <div>
+
+                </div>)
+
         }
         else
             return(
@@ -53,6 +63,6 @@ const PageContect = ({songsGlobal,setSongsGlobal, currentPage} : PageContectProp
                 </div>
             );
         }
-}
+
 
 export default PageContect;
