@@ -1,5 +1,5 @@
 
-import { Add, FavoriteBorder, PlayArrow } from "@mui/icons-material";
+import { Add, Favorite,FavoriteBorder, PlayArrow } from "@mui/icons-material";
 import useStyles from "./SongsTableStyle";
 import { IconButton, List, ListItem, ListItemText } from "@mui/material";
 import {ListItemIcon} from "@mui/material";
@@ -14,10 +14,11 @@ interface Song {
 interface PageInformation {
     songsList: Song[],
     isLoading: boolean,
-    error: string
+    error: string,
+    color: string
 }
 
-const SongsTable = ({ songsList, isLoading, error }: PageInformation) => {
+const SongsTable = ({ songsList, isLoading, error,color}: PageInformation) => {
 
     const { classes } = useStyles();
 
@@ -33,13 +34,15 @@ const SongsTable = ({ songsList, isLoading, error }: PageInformation) => {
             {/* הצגת השירים במידה והטעינה הסתיימה ואין שגיאה */}
             <List>
                 {!isLoading && !error && songsList.map((song) => (
-                    <ListItem className={classes.listItem}>
+                    <ListItem key={song.id} className={classes.listItem}>
                         <PlayArrow className={classes.arrow}></PlayArrow>
                         <ListItemText className={classes.songName}>{song.name}</ListItemText>
                         <ListItemIcon className={classes.leftRight}>
                              <IconButton>
-                                <Add className={classes.leftIcons}></Add>
-                                <FavoriteBorder className={classes.leftIcons}></FavoriteBorder>
+                                <Add className={classes.leftIcons}sx={{color:"white"}} ></Add>
+                                {color !== "white" ? (
+                                <Favorite sx={{color:color}}className={classes.leftIcons}></Favorite> ):
+                                 (<FavoriteBorder  sx={{color:color}}className={classes.leftIcons}></FavoriteBorder>)}
                             </IconButton>
                         </ListItemIcon>          
                     </ListItem>
