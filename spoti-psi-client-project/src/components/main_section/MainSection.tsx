@@ -1,12 +1,12 @@
 import useStyles from "./MainSectionStyle";
 import Sidebar from "../sideBar/SideBar";
 import PageContect from "../pageContect/PageContect";
-const MainSection = () => {
+const MainSection = ({setPageContect}: { setPageContect: (pageName: string) => void }) => {
     const {classes} = useStyles()
     return(
         <div className={classes.mainSectionDiv}>
             <PageContect></PageContect>
-            <Sidebar></Sidebar>
+            <Sidebar setPageContect={setPageContect}></Sidebar>
         </div>
     )
 }
