@@ -1,12 +1,25 @@
 import useStyles from "./MainSectionStyle";
 import Sidebar from "../sideBar/SideBar";
 import PageContect from "../pageContect/PageContect";
-const MainSection = ({setPageContect}: { setPageContect: (pageName: string) => void }) => {
-    const {classes} = useStyles()
+import type {Song, SongsPageProps}  from "../../App";
+
+export interface PageContectProps {
+    songsGlobal : Song[],
+    setSongsGlobal :  React.Dispatch<React.SetStateAction<Song[]>>,
+    currentPage : string
+}
+
+
+const MainSection = ({songsGlobal, setSongsGlobal, currentPage, setCurrentPage}: SongsPageProps) => {
+    const {classes} = useStyles();
+
+    const currentPageContectProps : PageContectProps = {songsGlobal, setSongsGlobal, currentPage};
+    
     return(
+        
         <div className={classes.mainSectionDiv}>
-            <PageContect></PageContect>
-            <Sidebar setPageContect={setPageContect}></Sidebar>
+            <PageContect songsGlobal={currentPageContectProps.songsGlobal} setSongsGlobal={currentPageContectProps.setSongsGlobal} currentPage={currentPageContectProps.currentPage}></PageContect>
+            <Sidebar setCurrentPage={setCurrentPage}></Sidebar>
         </div>
     )
 }
