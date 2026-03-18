@@ -6,19 +6,25 @@ import type {Song, SongsPageProps}  from "../../App";
 export interface PageContectProps {
     songsGlobal : Song[],
     setSongsGlobal :  React.Dispatch<React.SetStateAction<Song[]>>,
-    currentPage : string
+    currentPage : string,
+    favoirtesIds: number[],
+    setFavoritesIds:  React.Dispatch<React.SetStateAction<number[]>>
+    
+
 }
 
 
-const MainSection = ({songsGlobal, setSongsGlobal, currentPage, setCurrentPage}: SongsPageProps) => {
+const MainSection = ({songsGlobal, setSongsGlobal, currentPage, setCurrentPage,favoirtesIds,setFavoritesIds}: SongsPageProps) => {
     const {classes} = useStyles();
 
-    const currentPageContectProps : PageContectProps = {songsGlobal, setSongsGlobal, currentPage};
+    const currentPageContectProps : PageContectProps = {songsGlobal, setSongsGlobal, currentPage,favoirtesIds,setFavoritesIds};
     
     return(
         
         <div className={classes.mainSectionDiv}>
-            <PageContect songsGlobal={currentPageContectProps.songsGlobal} setSongsGlobal={currentPageContectProps.setSongsGlobal} currentPage={currentPageContectProps.currentPage}></PageContect>
+            <PageContect songsGlobal={currentPageContectProps.songsGlobal} setSongsGlobal={currentPageContectProps.setSongsGlobal}
+             currentPage={currentPageContectProps.currentPage} favoirtesIds={currentPageContectProps.favoirtesIds}
+             setFavoritesIds={currentPageContectProps.setFavoritesIds}></PageContect>
             <Sidebar setCurrentPage={setCurrentPage}></Sidebar>
         </div>
     )
