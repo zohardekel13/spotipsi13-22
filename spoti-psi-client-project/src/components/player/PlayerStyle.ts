@@ -8,7 +8,7 @@ const useStyles = makeStyles()(() => ({
         alignItems:"center",
         width : '100%',
         height : '8%',
-        backgroundColor: '#383838'
+        backgroundColor: '#2e2e2e'
     },
     playP:{
         fontSize:"25px",

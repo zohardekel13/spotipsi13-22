@@ -4,24 +4,22 @@ const useStyles = makeStyles()(() => ({
     sidebarContainer:{
         display:"flex",
         flexDirection:"column",
-        width:"13%",
-        height:"30%",
-        backgroundColor:"black",
-        border:"1px solid white"
+        width:"15%",
+        height:"98%",
+        borderLeft: '1px solid grey'
 
     },
     menuItem:{
         width:"100%",
-        height:"33%",
+        height:"10%",
         display:"flex",
-        flexDirection:"row-reverse",
-        backgroundColor:"black",
+        flexDirection:"row",
         alignItems:"center",
-        border:"1px solid white",
+        justifyContent: 'space-evenly',
         gap:"4%",
         cursor: 'pointer',
         '&:hover': {
-            backgroundColor:"#33006F"
+            backgroundColor:"#7633c3"
         },
         '&:active': {
             backgroundColor:"purple"
@@ -33,7 +31,6 @@ const useStyles = makeStyles()(() => ({
     },
     menuIcon:{
         color:"white"
-        
     }
 }))
 
