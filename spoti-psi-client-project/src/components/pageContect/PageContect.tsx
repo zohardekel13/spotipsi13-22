@@ -2,13 +2,8 @@ import useStyles from "./PageContectStyle";
 import useUrl from "../use_url/useUrl";
 import AllSongsPage from "../all_songs_page/AllSongsPage";
 import type { PageContectProps } from "../main_section/MainSection";
-import { useMemo } from "react";
-interface Song {
-    id: string,
-    name: string,
-    artist: string,
-    album: string
-}
+import FavoritesPage from "../favorites_page/FavoritesPage";
+import type { Song } from "../../App";
 
 interface PageInformation {
     songsList: Song[],
@@ -31,7 +26,8 @@ const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFa
     
     const songsUseUrl: useUrlProps<Song> = {currentPage:"songs", setSongsGlobal};
     const {isLoading: isLoadingSongs, error: errorSongs } = useUrl(songsUseUrl);
-    const favoriteUseUrl: useUrlProps<string> = {currentPage, setSongsGlobal: setFavoritesIds};
+    
+    const favoriteUseUrl: useUrlProps<string> = {currentPage: "favorites", setSongsGlobal: setFavoritesIds};
     const {isLoading: isLoadingFavorites, error:ErrorFavorites} = useUrl(favoriteUseUrl);
 
      
@@ -41,10 +37,10 @@ const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFa
         error: errorSongs
     }
         if (currentPage == "songs")
-        {   
+        {   console.log(favoirtesIds)
             return(
             <div className={classes.pageContectContainer}>
-                <AllSongsPage songsList={page_information.songsList} isLoading={page_information.isLoading} error={page_information.error} color="white"></AllSongsPage>
+                <AllSongsPage songsList={page_information.songsList} isLoading={page_information.isLoading} error={page_information.error} favoirtesIds={favoirtesIds} setFavoritesIds={setFavoritesIds}></AllSongsPage>
             </div>
             );
         }
@@ -54,10 +50,11 @@ const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFa
             console.log("Favorite IDs:", favoirtesIds);
             const filtredArray = songsGlobal.filter((song) => 
                 favoirtesIds.map(String).includes(String(song.id)));
+            console.log(favoirtesIds)
             console.log("Filtered Array:", filtredArray);
             return(
                 <div className={classes.pageContectContainer}>
-                <AllSongsPage songsList={filtredArray} isLoading={isLoadingFavorites} error={ErrorFavorites} color="#33006F"></AllSongsPage>
+                <FavoritesPage songsList={filtredArray} isLoading={isLoadingFavorites} error={ErrorFavorites} favoirtesIds={favoirtesIds} setFavoritesIds={setFavoritesIds}></FavoritesPage>
             </div>)
         }
         else
