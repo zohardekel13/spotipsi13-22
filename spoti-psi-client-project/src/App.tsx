@@ -22,7 +22,10 @@ export interface SongsPageProps {
     songsGlobal : Song[],
     setSongsGlobal :  React.Dispatch<React.SetStateAction<Song[]>>,
     currentPage : string,
-    setCurrentPage :  React.Dispatch<React.SetStateAction<string>>
+    setCurrentPage :  React.Dispatch<React.SetStateAction<string>>,
+    favoirtesIds: string[],
+    setFavoritesIds: React.Dispatch<React.SetStateAction<string[]>>
+
 }
     
 const App = () => {
@@ -31,12 +34,17 @@ const App = () => {
 
   //the currentPage followed by state
   const [currentPage,setCurrentPage] = useState<string>("");
+
+  const [favoirtesIds,setFavoritesIds] = useState<string[]>([]);
   
-  const currentSongsProps : SongsPageProps = {songsGlobal, setSongsGlobal, currentPage, setCurrentPage}
+  const currentSongsProps : SongsPageProps = {songsGlobal, setSongsGlobal, currentPage, setCurrentPage,favoirtesIds,setFavoritesIds}
   return(
     <div className="mainDiv">
        <Header></Header>
-       <MainSection songsGlobal={currentSongsProps.songsGlobal} setSongsGlobal={currentSongsProps.setSongsGlobal} currentPage={currentSongsProps.currentPage} setCurrentPage={currentSongsProps.setCurrentPage} ></MainSection>
+       <MainSection songsGlobal={currentSongsProps.songsGlobal}
+        setSongsGlobal={currentSongsProps.setSongsGlobal} currentPage={currentSongsProps.currentPage}
+         setCurrentPage={currentSongsProps.setCurrentPage} favoirtesIds={currentSongsProps.favoirtesIds} 
+         setFavoritesIds={currentSongsProps.setFavoritesIds}></MainSection>
        <Player></Player>
 
     </div>

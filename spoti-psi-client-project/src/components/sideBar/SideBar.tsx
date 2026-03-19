@@ -2,7 +2,7 @@ import useStyles from "./sideBarStyle";
 import HomeIcon from '@mui/icons-material/Home';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
+import { List , ListItemText, ListItem, ListItemIcon} from "@mui/material";
 
 const Sidebar = ({setCurrentPage}:  { setCurrentPage :  React.Dispatch<React.SetStateAction<string>>}) => {
     /**
@@ -14,22 +14,33 @@ const Sidebar = ({setCurrentPage}:  { setCurrentPage :  React.Dispatch<React.Set
     
 
     return (
-        <div className={classes.sidebarContainer}>
-            <div className={classes.menuItem} onClick={()=> setCurrentPage("songs")}>
-                <HomeIcon className={classes.menuIcon} />
-                <p className={classes.menuText}>כל השירים</p>
-            </div>
+        <List className={classes.sidebarContainer}>
+            <ListItem className={classes.menuItem} onClick={()=> setCurrentPage("songs")}>
+                <ListItemText className={classes.menuText}>כל השירים</ListItemText>
+                <ListItemIcon>
+                        <HomeIcon className={classes.menuIcon} />
+                </ListItemIcon>
+            </ListItem>
 
-            <div className={classes.menuItem} onClick={()=>setCurrentPage("playlists")}>
-                <LibraryMusicIcon className={classes.menuIcon} />
-                <p className={classes.menuText}>פלייליסטים</p>
-            </div>
+            <ListItem className={classes.menuItem} onClick={()=>setCurrentPage("playlists")}>
+                <ListItemText className={classes.menuText}>פלייליסטים</ListItemText>
+                <ListItemIcon>
+                        <LibraryMusicIcon className={classes.menuIcon} />
+                </ListItemIcon>
+            </ListItem>
 
-            <div className={classes.menuItem} onClick={()=>setCurrentPage("favorites")}>
-                <FavoriteIcon className={classes.menuIcon} />
-                <p className={classes.menuText}>מועדפים</p>
-            </div>
-        </div>
+            <ListItem className={classes.menuItem} onClick={()=>setCurrentPage("favorites")}>
+                <ListItemText className={classes.menuText}>מועדפים</ListItemText>
+                <ListItemIcon>
+                       <FavoriteIcon className={classes.menuIcon} />
+                </ListItemIcon>
+            </ListItem>
+
+
+        </List>
+
+  
+
     );
 };
 

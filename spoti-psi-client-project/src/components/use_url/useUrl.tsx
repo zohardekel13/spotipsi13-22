@@ -1,13 +1,7 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react';
 import type { useUrlProps } from '../pageContect/PageContect';
 
-interface Song{
-    id:string,
-    name:string,
-    artist:string,
-    album:string
-}
 
 /**
  * The function is a custom hook,
@@ -15,24 +9,26 @@ interface Song{
  * @param param - A url object with the url name.
  * @returns - The song list, is loading and error parameters.
  */
-const useUrl = ({currentPage, setSongsGlobal} : useUrlProps) => {
+const useUrl = <T,>({ currentPage, setSongsGlobal }: useUrlProps<T>) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string>('');
-    
+    let data:T[] = [];
     // יצירת פונקציה אסינכרונית לשליפה שירים והשמתם בסטייט
     const fetchSongs = async () => {
         // הגדרת התחלת טעינה של שירים
         setIsLoading(true);
         try {
             // גישה לשרת
-            let data = [];
             if (currentPage != ""){
                 const response = await fetch(`http://127.0.0.1:5001/api/${currentPage}`);
                 data = await response.json();
             }
-
+            console.log(data)
             setSongsGlobal(data);
+            
+
+          
 
 
         } catch (error) {

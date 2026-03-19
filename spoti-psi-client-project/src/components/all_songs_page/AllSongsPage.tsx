@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 
 import { Add, FavoriteBorder, PlayArrow } from "@mui/icons-material"
+=======
+>>>>>>> 0f25a3babcf28ec91d2512457ac02218234e3b0e
 import useStyles from "./AllSongsStyle";
+import SongsTable from "../songs_table/SongsTable";
 
 interface Song {
     id: string,
@@ -9,11 +13,13 @@ interface Song {
     album: string
 }
 
-interface PageInformation {
+export interface PageInformation {
     songsList: Song[],
     isLoading: boolean,
-    error: string
-}
+    error: string,
+    favoirtesIds: string[],
+    setFavoritesIds: React.Dispatch<React.SetStateAction<string[]>>
+}  
 
 /**
  * The function all songs page is a component, it gets the page information,
@@ -21,30 +27,13 @@ interface PageInformation {
  * @param param - The page information of the allSongsPage.
  * @returns - The div of the AllSongsPage component.
  */
-const AllSongsPage = ({ songsList, isLoading, error }: PageInformation) => {
+const AllSongsPage = ({ songsList, isLoading, error, favoirtesIds, setFavoritesIds}: PageInformation) => {
 
     const { classes } = useStyles();
     return (
         <div>
-            {/* הצגת טקסט טעינה במידה והמידע עדיין נטען */}
-            {isLoading && <p>Loading...</p>}
-
-            {/* הצגת שגיאה בגישה לשרת במידה ויש */}
-            {error && <p>{error}</p>}
-
-            {/* הצגת השירים במידה והטעינה הסתיימה ואין שגיאה */}
-            {!isLoading && !error && songsList.map((song, index) => (
-                <div className={classes.songContainer} key={index}>
-                    <div className={classes.leftRight}>
-                        <PlayArrow className={classes.arrow}></PlayArrow>
-                        <h2 className={classes.songName}>{song.name}</h2>
-                    </div>
-                    <div className={classes.leftRight}>
-                        <Add className={classes.plus}></Add>
-                        <FavoriteBorder className={classes.heart}></FavoriteBorder>
-                    </div>
-                </div>
-            ))}
+            <h1 className={classes.title}>כל השירים</h1>
+            <SongsTable songsList = {songsList} isLoading= {isLoading} error= {error} favoirtesIds={favoirtesIds} setFavoritesIds={setFavoritesIds} />
         </div>
     )
 
