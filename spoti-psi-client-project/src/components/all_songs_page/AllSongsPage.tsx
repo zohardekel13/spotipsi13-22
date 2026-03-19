@@ -8,11 +8,12 @@ interface Song {
     album: string
 }
 
-interface PageInformation {
+export interface PageInformation {
     songsList: Song[],
     isLoading: boolean,
     error: string,
-    color: string
+    favoirtesIds: string[],
+    setFavoritesIds: React.Dispatch<React.SetStateAction<string[]>>
 }  
 
 /**
@@ -21,13 +22,13 @@ interface PageInformation {
  * @param param - The page information of the allSongsPage.
  * @returns - The div of the AllSongsPage component.
  */
-const AllSongsPage = ({ songsList, isLoading, error,color}: PageInformation) => {
+const AllSongsPage = ({ songsList, isLoading, error, favoirtesIds, setFavoritesIds}: PageInformation) => {
 
     const { classes } = useStyles();
     return (
         <div>
             <h1 className={classes.title}>כל השירים</h1>
-            <SongsTable songsList = {songsList} isLoading= {isLoading} error= {error} color={color}/>
+            <SongsTable songsList = {songsList} isLoading= {isLoading} error= {error} favoirtesIds={favoirtesIds} setFavoritesIds={setFavoritesIds} />
         </div>
     )
 

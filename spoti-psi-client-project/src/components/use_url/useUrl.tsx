@@ -1,13 +1,7 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react';
 import type { useUrlProps } from '../pageContect/PageContect';
 
-interface Song{
-    id:string,
-    name:string,
-    artist:string,
-    album:string
-}
 
 /**
  * The function is a custom hook,
@@ -32,6 +26,9 @@ const useUrl = <T,>({ currentPage, setSongsGlobal }: useUrlProps<T>) => {
             }
             console.log(data)
             setSongsGlobal(data);
+            
+
+          
 
 
         } catch (error) {
