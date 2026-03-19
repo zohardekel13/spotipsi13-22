@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
 import { useState } from 'react';
-import type { useUrlProps } from '../pageContect/PageContect';
 
 
+export interface useUrlProps<T>{
+    currentPage : string,
+    setSongsGlobal: React.Dispatch<React.SetStateAction<T[]>> 
+}
 /**
  * The function is a custom hook,
  * it gets a url type and fetch all the songs by the url, from the server.
@@ -24,12 +27,9 @@ const useUrl = <T,>({ currentPage, setSongsGlobal }: useUrlProps<T>) => {
                 const response = await fetch(`http://127.0.0.1:5001/api/${currentPage}`);
                 data = await response.json();
             }
-            console.log(data)
+            console.log(data);
             setSongsGlobal(data);
             
-
-          
-
 
         } catch (error) {
             // הגדרת שגיאה בגישה לשרת
