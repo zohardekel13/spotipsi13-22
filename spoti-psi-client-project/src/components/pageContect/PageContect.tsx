@@ -5,6 +5,7 @@ import type { PageContectProps } from "../main_section/MainSection";
 import FavoritesPage from "../favorites_page/FavoritesPage";
 import type { Song,Playlist } from "../../App";
 import type { useUrlProps } from "../use_url/useUrl";
+import PlaylistPage from "../playlistsPage/playlistsPage";
 
 interface PageInformation {
     songsList: Song[],
@@ -63,8 +64,8 @@ const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFa
             console.log(isLoadingPlaylists);
             console.log(ErrorPlaylists);
             return(
-                <div>
-
+                <div className={classes.pageContectContainer}>
+                    <PlaylistPage playlists={playlists} isLoading={isLoadingPlaylists} error={ErrorPlaylists}></PlaylistPage>
                 </div>
             );
         }
