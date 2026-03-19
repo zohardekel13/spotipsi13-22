@@ -18,7 +18,7 @@ const useStyles = makeStyles()(() => ({
         }
     },
     arrow: {
-        color: "purple",
+        color: "#7633c3",
         size : 'small'
     },
     songName: {

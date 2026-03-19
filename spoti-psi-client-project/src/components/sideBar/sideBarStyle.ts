@@ -19,7 +19,7 @@ const useStyles = makeStyles()(() => ({
         gap:"4%",
         cursor: 'pointer',
         '&:hover': {
-            backgroundColor:"#33006F"
+            backgroundColor:"#7633c3"
         },
         '&:active': {
             backgroundColor:"purple"
