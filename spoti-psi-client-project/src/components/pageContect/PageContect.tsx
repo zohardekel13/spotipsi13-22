@@ -20,7 +20,8 @@ interface PageInformation {
  * and creates a div of all the page contect by the url.
  * @returns - A div of all the page contect by the url.
  */
-const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFavoritesIds,playlists,setPlaylists} : PageContectProps) => {
+
+    const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFavoritesIds,playlists,setPlaylists, playerProps} : PageContectProps) => {
     const { classes } = useStyles();
     
     const songsUseUrl: useUrlProps<Song> = {currentPage:"songs", setSongsGlobal};
@@ -41,7 +42,7 @@ const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFa
         {   console.log(favoirtesIds)
             return(
             <div className={classes.pageContectContainer}>
-                <AllSongsPage songsList={page_information.songsList} isLoading={page_information.isLoading} error={page_information.error} favoirtesIds={favoirtesIds} setFavoritesIds={setFavoritesIds}></AllSongsPage>
+                <AllSongsPage songsList={page_information.songsList} isLoading={page_information.isLoading} error={page_information.error} favoirtesIds={favoirtesIds} setFavoritesIds={setFavoritesIds} playerProps={playerProps}></AllSongsPage>
             </div>
             );
         }
@@ -55,7 +56,7 @@ const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFa
             console.log("Filtered Array:", filtredArray);
             return(
                 <div className={classes.pageContectContainer}>
-                <FavoritesPage songsList={filtredArray} isLoading={isLoadingFavorites} error={ErrorFavorites} favoirtesIds={favoirtesIds} setFavoritesIds={setFavoritesIds}></FavoritesPage>
+                <FavoritesPage songsList={filtredArray} isLoading={isLoadingFavorites} error={ErrorFavorites} favoirtesIds={favoirtesIds} setFavoritesIds={setFavoritesIds} playerProps={playerProps}></FavoritesPage>
             </div>)
         }
         else if (currentPage == "playlists")

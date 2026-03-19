@@ -4,12 +4,16 @@ import useStyles from "./SongsTableStyle";
 import { IconButton, List, ListItem, ListItemText } from "@mui/material";
 import {ListItemIcon} from "@mui/material";
 import type { PageInformation } from "../all_songs_page/AllSongsPage";
+import type { Song } from "../../App";
 
 
 
-const SongsTable = ({ songsList, isLoading, error, favoirtesIds, setFavoritesIds}: PageInformation) => {
+
+const SongsTable = ({ songsList, isLoading, error, favoirtesIds, setFavoritesIds, playerProps}: PageInformation) => {
 
     const { classes } = useStyles();
+
+    
 
     const  removeFromFavorites = async(songId: string) => {
         try {
@@ -44,8 +48,12 @@ const SongsTable = ({ songsList, isLoading, error, favoirtesIds, setFavoritesIds
             return;
     }
     
-
 }
+    const pickedSong = ( song : Song ) => {
+        playerProps.setQueue([...playerProps.queue, song]);
+        playerProps.setCurrentSong(song);
+        playerProps.setIsPlaying(true);
+    }
     return (
         <div>
             {/* הצגת טקסט טעינה במידה והמידע עדיין נטען */}
@@ -57,7 +65,7 @@ const SongsTable = ({ songsList, isLoading, error, favoirtesIds, setFavoritesIds
             {/* הצגת השירים במידה והטעינה הסתיימה ואין שגיאה */}
             <List>
                 {!isLoading && !error && songsList.map((song) => (
-                    <ListItem key={song.id} className={classes.listItem}>
+                    <ListItem key={song.id} className={classes.listItem} onClick={() => pickedSong(song)}>
                         <PlayArrow className={classes.arrow}></PlayArrow>
                         <ListItemText className={classes.songName}>{song.name}</ListItemText>
                         <ListItemIcon className={classes.leftRight}>
@@ -69,9 +77,9 @@ const SongsTable = ({ songsList, isLoading, error, favoirtesIds, setFavoritesIds
                                 {favoirtesIds.includes(song.id) ? (
                                 <Favorite sx={{color:'purple'}} className={classes.leftIcons} onClick={() => removeFromFavorites(song.id)}></Favorite> ):
                                  (<FavoriteBorder  sx={{color:'white'}}className={classes.leftIcons} onClick={() => addToFavorites(song.id)}></FavoriteBorder>)}
-                                
                             </IconButton>
-                        </ListItemIcon>          
+                        </ListItemIcon>  
+        
                     </ListItem>
                 ))}
             </List>
