@@ -1,9 +1,17 @@
 import { makeStyles } from "tss-react/mui";
 
 const useStyles = makeStyles()(() => ({
+    header:{
+        display:"flex",
+        flexDirection:"row-reverse",
+        justifyContent:"space-between",
+        padding:"5px"
+    },
     h1:{
         color:"white",
-        float: "right"
+        float: "right",
+        fontSize:"1.5rem",
+        fontWeight:"bold"
     },
     listItem:{
         display: "flex",
@@ -20,6 +28,12 @@ const useStyles = makeStyles()(() => ({
          }
     },
 
+    btn:{
+        backgroundColor:"black",
+        border:"1px solid #2e2e2e",
+        borderRadius:"20%",
+        color:"#7633c3"
+    },
     playlistName:{
         fontSize:"1.5rem",
         fontWeight:"bold",

@@ -5,7 +5,7 @@ import type { PageContectProps } from "../main_section/MainSection";
 import FavoritesPage from "../favorites_page/FavoritesPage";
 import type { Song,Playlist } from "../../App";
 import type { useUrlProps } from "../use_url/useUrl";
-import PlaylistPage from "../playlistsPage/playlistsPage";
+import PlaylistPage from "../playlistsPage/PlaylistsPage";
 
 interface PageInformation {
     songsList: Song[],

@@ -1,6 +1,9 @@
-import { List, ListItem, ListItemText,Typography } from "@mui/material";
-import useStyles from "./playlistPageStyle";
+import { Button, List, ListItem,Typography } from "@mui/material";
+import React from "react";
+import useStyles from "./PlaylistPageStyle";
 import type { Playlist } from "../../App";
+import DialogAddPlaylist from "../dialogAddPlaylist/DialogAddPlaylist";
+import { useRef } from "react";
 
 
 
@@ -10,9 +13,20 @@ export interface PlaylistPageProps{
     error: string
 }
 
-
 const PlaylistPage = ({playlists,isLoading,error}:PlaylistPageProps) =>{
     const {classes} = useStyles();
+        const inputRef = useRef<HTMLInputElement>(null);
+        const [open, setOpen] = React.useState(false);
+
+        const handleClickOpen = () => {setOpen(true);};    
+        const handleClose = () => {setOpen(false);};
+        const handleAddPlaylistClick = () => {
+            const playlistName = inputRef.current?.value.trim();
+            setOpen(false);
+            console.log(playlistName);
+            return playlistName;
+        }
+
     return (
         <div>
             {/* הצגת טקסט טעינה במידה והמידע עדיין נטען */}
@@ -22,7 +36,12 @@ const PlaylistPage = ({playlists,isLoading,error}:PlaylistPageProps) =>{
             {error && <p>{error}</p>}
 
             {/* הצגת השירים במידה והטעינה הסתיימה ואין שגיאה */}
-            <h1 className={classes.h1}>הפלייליסטים שלי</h1>
+            <div className={classes.header}>
+                <Typography className={classes.h1}>הפלייליסטים שלי</Typography>
+                <Button className={classes.btn} onClick={handleClickOpen}>הוסף פלייליסט</Button>
+            </div>
+            <DialogAddPlaylist open={open} handleClose={handleClose} 
+                handleAddPlaylistClick={handleAddPlaylistClick} inputRef={inputRef}/>
             <List>
                 {!isLoading && !error && playlists.map((playlist) => (
                     <ListItem key={playlist.id} className={classes.listItem}>
