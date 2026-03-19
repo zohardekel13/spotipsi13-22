@@ -1,8 +1,7 @@
-import { useState } from "react";
 import Header from "./components/header/Header";
 import MainSection from "./components/main_section/MainSection";
 import Player from "./components/player/Player";
-
+import { useState } from "react";
 export interface Song{
     id:string,
     name:string,

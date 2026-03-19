@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+
+import { Add, FavoriteBorder, PlayArrow } from "@mui/icons-material"
+=======
+>>>>>>> 0f25a3babcf28ec91d2512457ac02218234e3b0e
 import useStyles from "./AllSongsStyle";
 import SongsTable from "../songs_table/SongsTable";
 
