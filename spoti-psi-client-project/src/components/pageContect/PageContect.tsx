@@ -3,7 +3,8 @@ import useUrl from "../use_url/useUrl";
 import AllSongsPage from "../all_songs_page/AllSongsPage";
 import type { PageContectProps } from "../main_section/MainSection";
 import FavoritesPage from "../favorites_page/FavoritesPage";
-import type { Song } from "../../App";
+import type { Song,Playlist } from "../../App";
+import type { useUrlProps } from "../use_url/useUrl";
 
 interface PageInformation {
     songsList: Song[],
@@ -11,17 +12,14 @@ interface PageInformation {
     error: string
 }
 
-export interface useUrlProps<T>{
-    currentPage : string,
-    setSongsGlobal: React.Dispatch<React.SetStateAction<T[]>> 
-}
+
 
 /**
  * The function is a conponent, it gets all the page information by the url,
  * and creates a div of all the page contect by the url.
  * @returns - A div of all the page contect by the url.
  */
-const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFavoritesIds} : PageContectProps) => {
+const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFavoritesIds,playlists,setPlaylists} : PageContectProps) => {
     const { classes } = useStyles();
     
     const songsUseUrl: useUrlProps<Song> = {currentPage:"songs", setSongsGlobal};
@@ -29,8 +27,10 @@ const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFa
     
     const favoriteUseUrl: useUrlProps<string> = {currentPage: "favorites", setSongsGlobal: setFavoritesIds};
     const {isLoading: isLoadingFavorites, error:ErrorFavorites} = useUrl(favoriteUseUrl);
+    
+    const playlistUseUrl: useUrlProps<Playlist> = {currentPage:"playlists", setSongsGlobal:setPlaylists}
+    const {isLoading: isLoadingPlaylists, error:ErrorPlaylists} = useUrl(playlistUseUrl);
 
-     
     const page_information: PageInformation = {
         songsList: songsGlobal,
         isLoading: isLoadingSongs,
@@ -57,12 +57,24 @@ const PageContect = ({songsGlobal,setSongsGlobal, currentPage,favoirtesIds,setFa
                 <FavoritesPage songsList={filtredArray} isLoading={isLoadingFavorites} error={ErrorFavorites} favoirtesIds={favoirtesIds} setFavoritesIds={setFavoritesIds}></FavoritesPage>
             </div>)
         }
-        else
+        else if (currentPage == "playlists")
+        {
+            console.log("playlists :", playlists);
+            console.log(isLoadingPlaylists);
+            console.log(ErrorPlaylists);
             return(
                 <div>
 
                 </div>
             );
+        }
+        else{
+            return(
+                <div>
+
+                </div>
+            );
+        }
         }
 
 
